@@ -1,4 +1,3 @@
-wp-plugin-set-cookie-expiration
-===============================
+##### wp-plugin-set-cookie-expiration
 
-define cookie expiration time
+> define cookie expiration time
