@@ -14,22 +14,22 @@ if ( !class_exists( 'tcr_cookie_monster' ) ) :
 	class tcr_cookie_monster {
 
 		function __construct() {
-			add_filter( 'auth_cookie_expiration', array ( $this, '_TCR_set_cookie_expire_filter' ), 10, 3 );
+			add_filter( 'auth_cookie_expiration', array ( $this, 'tcr_set_cookie_expire_filter' ), 10, 3 );
 
 			if ( is_admin() ) :
-				add_action( 'admin_init',  array ( $this, '_TCR_set_cookie_expire_admin') );
+				add_action( 'admin_init',  array ( $this, 'tcr_set_cookie_expire_admin') );
 			endif;
 		}
 
 
-		function _TCR_set_cookie_expire_admin() {
+		function tcr_set_cookie_expire_admin() {
 			foreach ( array ( 'normal' => 'Normal', 'remember' => 'Remember' ) as $type => $label ) {
 				register_setting( 'privacy', "{$type}_cookie_expire", 'absint' );
-				add_settings_field( "{$type}_cookie_expire", $label . ' cookie expire', array( $this, '_TCR_set_cookie_expire_option') , 'privacy', 'default', $type );
+				add_settings_field( "{$type}_cookie_expire", $label . ' cookie expire', array( $this, 'tcr_set_cookie_expire_option') , 'privacy', 'default', $type );
 			}
 		}
 
-		function _TCR_set_cookie_expire_option( $type ) {
+		function tcr_set_cookie_expire_option( $type ) {
 			if ( ! $expires = get_option( "{$type}_cookie_expire" ) ) {
 				$expires = $type === 'normal' ? 2 : 14;
 			}
@@ -37,7 +37,7 @@ if ( !class_exists( 'tcr_cookie_monster' ) ) :
 		}
 
 
-		function _TCR_set_cookie_expire_filter( $default, $user_ID, $remember ) {
+		function tcr_set_cookie_expire_filter( $default, $user_ID, $remember ) {
 			if ( ! $expires = get_option( $remember ? 'remember_cookie_expire' : 'normal_cookie_expire' ) ) {
 				$expires = 0;
 			}
