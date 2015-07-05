@@ -6,7 +6,7 @@ Version: 1.0.0
 Plugin URI: http://thecellarroom.uk
 Author: The Cellar Room Limited
 Author URI: http://thecellarroom.uk
-Copyright (c) 2013 The Cellar Room Limited
+Copyright (c) 2015 The Cellar Room Limited
 */
 
 if ( !class_exists( 'tcr_cookie_monster' ) ) :
